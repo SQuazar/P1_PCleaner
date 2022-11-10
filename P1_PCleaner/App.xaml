@@ -1,9 +1,27 @@
 ﻿<Application x:Class="P1_PCleaner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:P1_PCleaner"
+             xmlns:view="clr-namespace:P1_PCleaner.View"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/NavigationTheme.xaml" />
+                <ResourceDictionary Source="Style/CommonTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- <DataTemplate DataType="{x:Type viewModel:DiskInfoViewModel}"> -->
+            <!--     <view:DiskInfoView/> -->
+            <!-- </DataTemplate> -->
+            <DataTemplate DataType="{x:Type viewModel:ScanViewModel}">
+                <view:ScanView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RecycleBinViewModel}">
+                <view:RecycleBinView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:NotFoundViewModel}">
+                <view:NotFoundView />
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
