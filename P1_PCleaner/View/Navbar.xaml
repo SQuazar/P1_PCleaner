@@ -4,32 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:control="clr-namespace:P1_PCleaner.Control"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="200" Background="Transparent">
     <Border CornerRadius="10">
         <Grid>
             <StackPanel>
                 <TextBlock Text="Управление" Margin="10 10 0 0" FontSize="22" FontWeight="Bold" />
-                <RadioButton Content="Сканирование" IsChecked="True"
-                             Style="{StaticResource NavButton}"
-                             Margin="0 8 0 0" 
-                             Command="{Binding ChangeView}"
-                             CommandParameter="{x:Static viewModel:ViewType.Scanner}"/>
-                <RadioButton Content="Мусор"
-                             Style="{StaticResource NavButton}" 
-                             Margin="0 8 0 0"
-                             Command="{Binding ChangeView}"
-                             CommandParameter="{x:Static viewModel:ViewType.JunkFiles}"/>
-                <RadioButton Content="Дубликаты файлов"
-                             Style="{StaticResource NavButton}"
-                             Margin="0 8 0 0"
-                             Command="{Binding ChangeView}"
-                             CommandParameter="{x:Static viewModel:ViewType.Undefined}"/>
-                <RadioButton Content="Корзина"
-                             Style="{StaticResource NavButton}"
-                             Margin="0 8 0 0"
-                             Command="{Binding ChangeView}"
-                             CommandParameter="{x:Static viewModel:ViewType.RecycleBin}"/>
+                <control:NavRadioButton Content="Сканирование"
+                                        IsChecked="True"
+                                        Icon="Home"
+                                        Style="{StaticResource NavIconButton}"
+                                        Margin="0 8 0 0"
+                                        Command="{Binding ChangeView}"
+                                        CommandParameter="{x:Static viewModel:ViewType.Scanner}" />
+                <control:NavRadioButton Content="Мусор"
+                                        Style="{StaticResource NavIconButton}"
+                                        Icon="TrashOutline"
+                                        Margin="0 8 0 0"
+                                        Command="{Binding ChangeView}"
+                                        CommandParameter="{x:Static viewModel:ViewType.JunkFiles}" />
+                <control:NavRadioButton Content="Дубликаты файлов"
+                                        Style="{StaticResource NavIconButton}"
+                                        Icon="FileOutline"
+                                        Margin="0 8 0 0"
+                                        Command="{Binding ChangeView}"
+                                        CommandParameter="{x:Static viewModel:ViewType.Undefined}" />
+                <control:NavRadioButton Content="Корзина"
+                                        Style="{StaticResource NavIconButton}"
+                                        Margin="0 8 0 0" Icon="TrashOutline"
+                                        Command="{Binding ChangeView}"
+                                        CommandParameter="{x:Static viewModel:ViewType.RecycleBin}" />
             </StackPanel>
         </Grid>
     </Border>
