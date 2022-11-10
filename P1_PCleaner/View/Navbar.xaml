@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="P1_PCleaner.View.Navbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="200" Background="Transparent">
+    <Border CornerRadius="10">
+        <Grid>
+            <StackPanel>
+                <TextBlock Text="Управление" Margin="10 10 0 0" FontSize="22" FontWeight="Bold" />
+                <RadioButton Content="Сканирование" IsChecked="True"
+                             Style="{StaticResource NavButton}"
+                             Margin="0 8 0 0" 
+                             Command="{Binding ChangeView}"
+                             CommandParameter="{x:Static viewModel:ViewType.Scanner}"/>
+                <RadioButton Content="Мусор"
+                             Style="{StaticResource NavButton}" 
+                             Margin="0 8 0 0"
+                             Command="{Binding ChangeView}"
+                             CommandParameter="{x:Static viewModel:ViewType.JunkFiles}"/>
+                <RadioButton Content="Дубликаты файлов"
+                             Style="{StaticResource NavButton}"
+                             Margin="0 8 0 0"
+                             Command="{Binding ChangeView}"
+                             CommandParameter="{x:Static viewModel:ViewType.Undefined}"/>
+                <RadioButton Content="Корзина"
+                             Style="{StaticResource NavButton}"
+                             Margin="0 8 0 0"
+                             Command="{Binding ChangeView}"
+                             CommandParameter="{x:Static viewModel:ViewType.RecycleBin}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
