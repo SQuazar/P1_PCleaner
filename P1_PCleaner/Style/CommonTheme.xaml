@@ -26,7 +26,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border Background="#e81123"
-                                    CornerRadius="0 10 0 0">
+                                    CornerRadius="0 7 0 0">
                                 <ContentPresenter
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -81,10 +81,12 @@
         </Style.Resources>
         <Style.Setters>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="120"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#e0e0e0"/>
+            <Setter Property="MinWidth" Value="120"/>
             <Setter Property="Height" Value="32"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect Color="DarkGray" Direction="310" ShadowDepth="2.5" BlurRadius="4" Opacity="0"
@@ -94,8 +96,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="2"
-                            Background="{TemplateBinding Background}">
+                        <Border CornerRadius="3"
+                            Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           Margin="{TemplateBinding Padding}"
@@ -122,5 +126,43 @@
            BasedOn="{StaticResource Btn}">
         <Setter Property="Background" Value="#2b98ff"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style x:Key="BtnWhite" TargetType="Button"
+           BasedOn="{StaticResource Btn}">
+        <Style.Resources>
+            <Storyboard x:Key="GlowOn">
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                               Storyboard.TargetProperty="(Effect).Opacity">
+                    <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0.9"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="GlowOff">
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
+                                               Storyboard.TargetProperty="(Effect).Opacity">
+                    <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0.1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </Style.Resources>
+        <Style.Setters>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="DarkGray" Direction="310" ShadowDepth="2.5" BlurRadius="4" Opacity="0.1"
+                                      RenderingBias="Performance"/>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard
+                        Storyboard="{StaticResource GlowOn}"/>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard
+                        Storyboard="{StaticResource GlowOff}"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
