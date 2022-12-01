@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="P1_PCleaner.View.JunkFilesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
+             xmlns:control="clr-namespace:P1_PCleaner.Control"
+             mc:Ignorable="d"
+             d:DesignHeight="550" d:DesignWidth="750" Background="Transparent"
+             d:DataContext="{d:DesignInstance viewModel:JunkFilesViewModel, IsDesignTimeCreatable=True}">
+    <Border CornerRadius="10 0 10 0" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="#F0F0F0">
+                    <StackPanel Orientation="Vertical" Background="Transparent">
+                        <control:CategoryRadioButton Content="Windows System" FontSize="16"
+                                                     CategorySize="10.0" CategoryIdentificator="GB"
+                                                     Style="{StaticResource LeftTopRoundedCategoryButton}"
+                                                     IsChecked="True"
+                                                     Command="{Binding ChangeJunkCategory}"
+                                                     CommandParameter="{x:Static viewModel:JunkCategory.WindowsSystem}" />
+                        <control:CategoryRadioButton Content="Кэш Браузеров" FontSize="16"
+                                                     CategorySize="7.1" CategoryIdentificator="GB"
+                                                     Style="{StaticResource CategoryButton}"
+                                                     Command="{Binding ChangeJunkCategory}"
+                                                     CommandParameter="{x:Static viewModel:JunkCategory.BrowserCache}" />
+                        <control:CategoryRadioButton Content="Загрузки" FontSize="16"
+                                                     CategorySize="6" CategoryIdentificator="GB"
+                                                     Style="{StaticResource CategoryButton}"
+                                                     Command="{Binding ChangeJunkCategory}"
+                                                     CommandParameter="{x:Static viewModel:JunkCategory.Downloads}" />
+                    </StackPanel>
+                </Border>
+                <ContentControl Grid.Column="1" Content="{Binding CurrentJunkCategory}" />
+            </Grid>
+            <Border Grid.Row="1" Background="#F6F6F6F6"
+                    BorderBrush="#E8E8E8E8" CornerRadius="0 0 10 0"
+                    BorderThickness="0 2 0 0">
+                <Grid Row="1" x:Name="ControlButtons">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0 0 20 0">
+                        <Button Content="Очистить" Style="{StaticResource BtnBlue}" Margin="0 0 20 0" />
+                        <Button Content="Сканировать" Style="{StaticResource BtnWhite}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="20 0 0 5">
+                        <TextBlock FontSize="14">
+                            <Run Text="{Binding SelectedSize, StringFormat=N2}" FontSize="32" FontWeight="Bold" />
+                            <Run Text="GB" />
+                            <Run Text="selected" />
+                        </TextBlock>
+                        <TextBlock FontSize="14" Margin="50 0 0 0">
+                            <Run Text="{Binding TotalSize, StringFormat=N2}" FontSize="32" FontWeight="Bold" />
+                            <Run Text="GB" />
+                            <Run Text="total" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

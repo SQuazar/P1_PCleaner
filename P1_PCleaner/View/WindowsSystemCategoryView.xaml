@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="P1_PCleaner.View.WindowsSystemCategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:P1_PCleaner.View"
+             xmlns:control="clr-namespace:P1_PCleaner.Control"
+             mc:Ignorable="d"
+             d:DesignHeight="460" d:DesignWidth="540">
+    <StackPanel Orientation="Vertical" Background="White">
+        <control:CategoryCheckBox Content="Системные Лог Файлы" FontSize="16"
+                                  Style="{StaticResource CategoryBox}"/>
+        <control:CategoryCheckBox Content="Кэш Системы" FontSize="16" Size="500"
+                                  Style="{StaticResource CategoryBox}"/>
+        <control:CategoryCheckBox Content="Временные Файлы" FontSize="16" Size="2.3" SizeSuffix="GB"
+                                  Style="{StaticResource CategoryBox}"/>
+    </StackPanel>
+</UserControl>
