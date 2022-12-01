@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:P1_PCleaner.View"
+        xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="960"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
-        WindowStyle="None">
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel, IsDesignTimeCreatable=True}">
     <Border
         CornerRadius="7">
         <Grid>
@@ -49,8 +51,7 @@
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Grid.Column="0">
-                        <view:Navbar />
+                    <ContentControl Grid.Column="0" Content="{Binding NavbarViewModel}">
                     </ContentControl>
                     <Border Grid.Column="1" Background="Transparent" Margin="0 0 1 1"
                             BorderThickness="1 1 0 0" BorderBrush="#dfdfdf" CornerRadius="10 0 5 0">

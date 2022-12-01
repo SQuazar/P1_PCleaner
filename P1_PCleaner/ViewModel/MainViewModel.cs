@@ -6,32 +6,15 @@ namespace P1_PCleaner.ViewModel;
 
 public class MainViewModel : ObservableObject
 {
-    private object? _currentViewModel;
+    private readonly NavbarViewModel _navbar = new();
 
-    public object? CurrentViewModel 
-    {
-        get => _currentViewModel;
-        set
-        {
-            _currentViewModel = value;
-            OnPropertyChanged();
-        }
-    }
+    public NavbarViewModel NavbarViewModel => _navbar;
+
+    public ObservableObject? CurrentViewModel => _navbar.CurrentViewModel;
 
     public MainViewModel()
     {
-        _currentViewModel = new ScanViewModel();
-    }
-
-    public RelayCommand<ViewType> ChangeView => new(ChangeViewModel);
-
-    public void ChangeViewModel(ViewType type)
-    {
-        CurrentViewModel = type switch
-        {
-            ViewType.Scanner => new ScanViewModel(),
-            ViewType.RecycleBin => new RecycleBinViewModel(),
-            _ => new NotFoundViewModel()
-        };
+        _navbar.CurrentViewModel = new ScanViewModel();
+        _navbar.ViewModelChanged += () => OnPropertyChanged(nameof(CurrentViewModel));
     }
 }
