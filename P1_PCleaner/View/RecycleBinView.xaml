@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="400" Background="Transparent"
+             d:DataContext="{d:DesignInstance Type=viewModel:RecycleBinViewModel, IsDesignTimeCreatable=True}">
     <Border CornerRadius="10 0 10 0" Background="White">
         <Grid>
             <Grid.RowDefinitions>
@@ -16,9 +18,9 @@
                 <fa:ImageAwesome Icon="Recycle" Width="100" Foreground="#2b98ff" />
                 <TextBlock HorizontalAlignment="Center" FontSize="14">
                     <TextBlock Text="Всего:" />
-                    <TextBlock Text="{Binding TotalGb, StringFormat=N2}" FontSize="24" />
-                    <TextBlock Text="GB" FontSize="24" />
-                    <TextBlock Text="{Binding FilesCount}" />
+                    <TextBlock Text="{Binding Info.Size, StringFormat=N2}" FontSize="24" />
+                    <TextBlock Text="{Binding Info.SizeSuffix}" FontSize="24" />
+                    <TextBlock Text="{Binding Info.FileCount}" />
                     <TextBlock Text="файлов" />
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Center">
@@ -27,8 +29,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
                 <Button Content="Очистить" Margin="0 0 20 10"
-                        Style="{StaticResource BtnBlue}">
+                        Style="{StaticResource BtnBlue}"
+                        Command="{Binding ClearRecycleBin}">
                 </Button>
+                <Button Content="Сканировать" Margin="0 0 20 10"
+                        Style="{StaticResource BtnWhite}"/>
             </StackPanel>
         </Grid>
     </Border>
