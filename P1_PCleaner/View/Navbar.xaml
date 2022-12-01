@@ -7,7 +7,8 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:control="clr-namespace:P1_PCleaner.Control"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="200" Background="Transparent">
+             d:DesignHeight="500" d:DesignWidth="200" Background="Transparent"
+             d:DataContext="{d:DesignInstance Type=viewModel:NavbarViewModel, IsDesignTimeCreatable=True}">
     <Border CornerRadius="10">
         <Grid>
             <StackPanel>
@@ -27,7 +28,7 @@
                                         CommandParameter="{x:Static viewModel:ViewType.JunkFiles}" />
                 <control:NavRadioButton Content="Дубликаты файлов"
                                         Style="{StaticResource NavIconButton}"
-                                        Icon="FileOutline"
+                                        Icon="FileTextOutline"
                                         Margin="0 8 0 0"
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.Undefined}" />
@@ -36,6 +37,36 @@
                                         Margin="0 8 0 0" Icon="TrashOutline"
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.RecycleBin}" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 0 5 20" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">
+                    <Hyperlink Foreground="Transparent"
+                               Command="{Binding OpenUrl}"
+                               CommandParameter="https://vk.com/thequazar">
+                        <fa:ImageAwesome Icon="Vk" Width="35" Foreground="#2b98ff" />
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
+                    <Hyperlink Foreground="Transparent"
+                               Command="{Binding OpenUrl}"
+                               CommandParameter="https://github.com/SQuazar">
+                        <fa:ImageAwesome Icon="Github" Width="35"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
+                    <Hyperlink Foreground="Transparent"
+                               Command="{Binding OpenUrl}"
+                               CommandParameter="https://t.me/squazar">
+                        <fa:ImageAwesome Icon="Telegram" Width="35" Foreground="#2b98ff"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
+                    <Hyperlink Foreground="Transparent"
+                               Command="{Binding OpenUrl}"
+                               CommandParameter="https://vityaschel.github.io/YouWantToBecomeAProgrammer/">
+                        <fa:ImageAwesome Icon="Code" Width="35"/>
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </Grid>
     </Border>
