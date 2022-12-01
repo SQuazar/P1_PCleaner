@@ -10,21 +10,32 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/NavigationTheme.xaml" />
                 <ResourceDictionary Source="Style/CommonTheme.xaml" />
+                <ResourceDictionary Source="Style/JunkFilesTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <!-- <DataTemplate DataType="{x:Type viewModel:DiskInfoViewModel}"> -->
-            <!--     <view:DiskInfoView/> -->
-            <!-- </DataTemplate> -->
+            <DataTemplate DataType="{x:Type viewModel:NavbarViewModel}">
+                <view:Navbar />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:ScanViewModel}">
                 <view:ScanView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RecycleBinViewModel}">
                 <view:RecycleBinView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:JunkFilesViewModel}">
+                <view:JunkFilesView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:NotFoundViewModel}">
                 <view:NotFoundView />
             </DataTemplate>
-            <Style TargetType="control:NavRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}"/>
-
+            <DataTemplate DataType="{x:Type viewModel:WindowsSystemCategoryViewModel}">
+                <view:WindowsSystemCategoryView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:BrowserCacheCategoryViewModel}">
+                <view:BrowserCacheCategoryView />
+            </DataTemplate>
+            <Style TargetType="control:NavRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />
+            <Style TargetType="control:CategoryRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />
+            <Style TargetType="control:CategoryCheckBox" BasedOn="{StaticResource {x:Type CheckBox}}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
