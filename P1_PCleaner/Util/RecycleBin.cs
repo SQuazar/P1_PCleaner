@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using P1_PCleaner.Factory;
 
 namespace P1_PCleaner.Util;
 
@@ -29,10 +30,10 @@ public static class RecycleBin
     private static extern uint SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, RecycleFlags flags);
 
 
-    public struct Info
+    public class Info
     {
         public double Size { get; init; }
-        public string SizeSuffix { get; set; }
+        public string SizeSuffix { get; set; } = "B";
         public long FileCount { get; init; }
     }
 
@@ -45,34 +46,14 @@ public static class RecycleBin
         var result = SHQueryRecycleBin(string.Empty, ref sQueryRbInfo);
         if (result != 0) throw new IOException("Cannot get recycle bin folder info");
 
-        var size = (double)sQueryRbInfo.i64Size;
-        string sizeSuffix;
-        if (size < 1024)
-            sizeSuffix = "B";
-        else if (size < Math.Pow(1024, 2))
-            sizeSuffix = "KB";
-        else if (size < Math.Pow(1024, 3))
-            sizeSuffix = "MB";
-        else if (size < Math.Pow(1024, 4))
-            sizeSuffix = "GB";
-        else if (size < Math.Pow(1024, 5))
-            sizeSuffix = "TB";
-        else sizeSuffix = "unresolved";
-        size = sizeSuffix switch
-        {
-            "B" => size,
-            "KB" => size / 1024,
-            "MB" => size / 1024 / 1024,
-            "GB" => size / 1024 / 1024 / 1024,
-            "TB" => size / 1024 / 1024 / 1024 / 1024,
-            _ => 0
-        };
+        var length = sQueryRbInfo.i64Size;
+        var sizeInfo = new FileSizeFactory().CreateInfo(length);
 
         var info = new Info
         {
             FileCount = sQueryRbInfo.i64NumItems,
-            Size = size,
-            SizeSuffix = sizeSuffix
+            Size = sizeInfo.Size,
+            SizeSuffix = sizeInfo.SizeSuffix
         };
         return info;
     }
