@@ -13,8 +13,7 @@
             <fa:ImageAwesome Icon="CircleOutlineNotch" Spin="True" Width="150" Height="150" />
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="24">
-                <Run Text="{Binding Percent, StringFormat=N1}"/>
-                <Run Text="%"/>
+                <Run Text="{Binding Percent, StringFormat=N1}"/><Run Text="%"/>
             </TextBlock>
             <TextBlock Text="{Binding Text}" FontSize="18" HorizontalAlignment="Center"
                        Margin="0 200 0 0" />
