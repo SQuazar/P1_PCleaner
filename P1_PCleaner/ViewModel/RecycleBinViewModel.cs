@@ -3,7 +3,7 @@ using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
 
-public class RecycleBinViewModel : ObservableObject
+public class RecycleBinViewModel : ViewModelBase
 {
     public RecycleBinViewModel()
     {
@@ -20,6 +20,7 @@ public class RecycleBinViewModel : ObservableObject
         RecycleBin.Clear();
         var info = RecycleBin.GetInfo();
         Info = info;
+        App.ScannedRepository.RecycleBinInfo = Info;
         OnPropertyChanged(nameof(Info));
     });
 }
