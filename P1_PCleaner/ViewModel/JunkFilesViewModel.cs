@@ -1,38 +1,51 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using P1_PCleaner.Command;
+using P1_PCleaner.Factory;
 using P1_PCleaner.Model;
+using P1_PCleaner.Repository;
 using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
 
 public class JunkFilesViewModel : ObservableObject
 {
-    private double _selectedSize;
-    private double _totalSize;
+    private ObservableObject? _currentJunkCategory;
 
-    private ObservableObject? _currentJunkCategory = new WindowsSystemCategoryViewModel();
+    private readonly WindowsSystemCategoryViewModel _windowsCategoryViewModel;
+    private readonly BrowserCacheCategoryViewModel _browserCacheCategoryViewModel;
+    private readonly DownloadsCategoryViewModel _downloadsCategoryViewModel;
 
-    public double SelectedSize
+    public SizeInfo WindowsSystemSize => new FileSizeFactory().CreateInfo
+    (
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemLogFiles).SizeInfo.Length +
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemCache).SizeInfo.Length +
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.TempFiles).SizeInfo.Length
+    );
+
+    public SizeInfo BrowserCacheSize =>
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.GoogleChrome).SizeInfo +
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MozillaFirefox).SizeInfo +
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MicrosoftEdge).SizeInfo;
+
+    public SizeInfo DownloadsSize => App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads).SizeInfo;
+
+    public SizeInfo SelectedSize
     {
-        get => _selectedSize;
-        set
+        get
         {
-            _selectedSize = value;
-            OnPropertyChanged();
+            var selected = App.ScannedRepository.Categories().Values.Where(category => category.IsSelected)
+                .Select(category => category.SizeInfo);
+            var length = selected.Sum(sizeInfo => sizeInfo.Length);
+            return new FileSizeFactory().CreateInfo(length);
         }
     }
 
-    public double TotalSize
-    {
-        get => _totalSize;
-        set
-        {
-            _totalSize = value;
-            OnPropertyChanged();
-        }
-    }
+    public SizeInfo TotalSize =>
+        new FileSizeFactory().CreateInfo(App.ScannedRepository.Categories().Values
+            .Sum(category => category.SizeInfo.Length));
 
     public ObservableObject? CurrentJunkCategory
     {
@@ -45,8 +58,28 @@ public class JunkFilesViewModel : ObservableObject
     }
 
     public RelayCommand<JunkCategory> ChangeJunkCategory { get; }
+
     public JunkFilesViewModel()
     {
+        _windowsCategoryViewModel = new WindowsSystemCategoryViewModel(
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemLogFiles),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemCache),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.TempFiles));
+        _windowsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+        
+        _browserCacheCategoryViewModel = new BrowserCacheCategoryViewModel(
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.GoogleChrome),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MozillaFirefox),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MicrosoftEdge)
+        );
+        _browserCacheCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+
+        _downloadsCategoryViewModel =
+            new DownloadsCategoryViewModel(App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads));
+        _downloadsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+
+        CurrentJunkCategory = _windowsCategoryViewModel;
+        
         ChangeJunkCategory = new RelayCommand<JunkCategory>(ChangeCategory);
     }
 
@@ -54,9 +87,10 @@ public class JunkFilesViewModel : ObservableObject
     {
         CurrentJunkCategory = category switch
         {
-            JunkCategory.WindowsSystem => new WindowsSystemCategoryViewModel(),
-            JunkCategory.BrowserCache => new BrowserCacheCategoryViewModel(),
-            _ => null
+            JunkCategory.WindowsSystem => _windowsCategoryViewModel,
+            JunkCategory.BrowserCache => _browserCacheCategoryViewModel,
+            JunkCategory.Downloads => _downloadsCategoryViewModel,
+            _ => throw new ArgumentOutOfRangeException(nameof(category), category, null)
         };
     }
 }
