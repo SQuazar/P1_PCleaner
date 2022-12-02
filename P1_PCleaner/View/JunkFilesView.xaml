@@ -22,18 +22,21 @@
                 <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="#F0F0F0">
                     <StackPanel Orientation="Vertical" Background="Transparent">
                         <control:CategoryRadioButton Content="Windows System" FontSize="16"
-                                                     CategorySize="10.0" CategoryIdentificator="GB"
+                                                     CategorySize="{Binding WindowsSystemSize.Size}"
+                                                     CategoryIdentificator="{Binding WindowsSystemSize.SizeSuffix}"
                                                      Style="{StaticResource LeftTopRoundedCategoryButton}"
                                                      IsChecked="True"
                                                      Command="{Binding ChangeJunkCategory}"
                                                      CommandParameter="{x:Static viewModel:JunkCategory.WindowsSystem}" />
                         <control:CategoryRadioButton Content="Кэш Браузеров" FontSize="16"
-                                                     CategorySize="7.1" CategoryIdentificator="GB"
+                                                     CategorySize="{Binding BrowserCacheSize.Size}"
+                                                     CategoryIdentificator="{Binding BrowserCacheSize.SizeSuffix}"
                                                      Style="{StaticResource CategoryButton}"
                                                      Command="{Binding ChangeJunkCategory}"
                                                      CommandParameter="{x:Static viewModel:JunkCategory.BrowserCache}" />
                         <control:CategoryRadioButton Content="Загрузки" FontSize="16"
-                                                     CategorySize="6" CategoryIdentificator="GB"
+                                                     CategorySize="{Binding DownloadsSize.Size}"
+                                                     CategoryIdentificator="{Binding DownloadsSize.SizeSuffix}"
                                                      Style="{StaticResource CategoryButton}"
                                                      Command="{Binding ChangeJunkCategory}"
                                                      CommandParameter="{x:Static viewModel:JunkCategory.Downloads}" />
@@ -46,8 +49,8 @@
                     BorderThickness="0 2 0 0">
                 <Grid Row="1" x:Name="ControlButtons">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
@@ -59,13 +62,15 @@
                                 VerticalAlignment="Center"
                                 Margin="20 0 0 5">
                         <TextBlock FontSize="14">
-                            <Run Text="{Binding SelectedSize, StringFormat=N2}" FontSize="32" FontWeight="Bold" />
-                            <Run Text="GB" />
+                            <Run Text="{Binding SelectedSize.Size, StringFormat=N2, Mode=OneWay}" FontSize="32"
+                                 FontWeight="Bold" />
+                            <Run Text="{Binding SelectedSize.SizeSuffix}" />
                             <Run Text="selected" />
                         </TextBlock>
                         <TextBlock FontSize="14" Margin="50 0 0 0">
-                            <Run Text="{Binding TotalSize, StringFormat=N2}" FontSize="32" FontWeight="Bold" />
-                            <Run Text="GB" />
+                            <Run Text="{Binding TotalSize.Size, StringFormat=N2, Mode=OneWay}" FontSize="32"
+                                 FontWeight="Bold" />
+                            <Run Text="{Binding TotalSize.SizeSuffix}" />
                             <Run Text="total" />
                         </TextBlock>
                     </StackPanel>
