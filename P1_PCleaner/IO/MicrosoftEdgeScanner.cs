@@ -16,21 +16,43 @@ public class MicrosoftEdgeScanner : IScanner
         string[] ext;
 
         // Cache Storage
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\Service Worker\CacheStorage");
-        ext = new[] { "*" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\Service Worker\CacheStorage");
+            ext = new[] { "*" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
         // History
         var factory = new FileSizeFactory();
-        var history =
-            new FileInfo(
-                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\History");
-        files.Add(new FileInf { Path = history.FullName, SizeInfo = factory.CreateInfo(history.Length) });
-        var visits =
-            new FileInfo(
-                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\Visited Links");
-        files.Add(new FileInf { Path = visits.FullName, SizeInfo = factory.CreateInfo(visits.Length) });
+        try
+        {
+            var history =
+                new FileInfo(
+                    $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\History");
+            files.Add(new FileInf { Path = history.FullName, SizeInfo = factory.CreateInfo(history.Length) });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            var visits =
+                new FileInfo(
+                    $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Microsoft\Edge\User Data\Default\Visited Links");
+            files.Add(new FileInf { Path = visits.FullName, SizeInfo = factory.CreateInfo(visits.Length) });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
         return files;
     }

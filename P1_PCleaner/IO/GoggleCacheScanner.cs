@@ -15,13 +15,28 @@ public class GoggleCacheScanner : IScanner
         string[] ext;
 
         // Google Cache Storage
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Google\Chrome\User Data\Default\Service Worker\CacheStorage");
-        ext = new[] { "*" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
-        directory = new DirectoryInfo(@"C:\Program Files\Google\Chrome\Application");
-        ext = new[] { ".7z" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Google\Chrome\User Data\Default\Service Worker\CacheStorage");
+            ext = new[] { "*" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Program Files\Google\Chrome\Application");
+            ext = new[] { ".7z" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
         return files;
     }
 

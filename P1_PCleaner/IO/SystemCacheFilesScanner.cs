@@ -15,13 +15,28 @@ public class SystemCacheFilesScanner : IScanner
         string[] ext;
 
         // CryptoAPICert Cache
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content");
         ext = new[] { "*" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\LocalLow\Microsoft\CryptnetUrlCache\MetaData");
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content");
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\LocalLow\Microsoft\CryptnetUrlCache\MetaData");
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
         return files;
     }
 

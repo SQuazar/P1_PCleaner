@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using P1_PCleaner.Model;
 using P1_PCleaner.Repository;
@@ -14,45 +15,98 @@ public class SystemLogFilesScanner : IScanner
         string[] ext;
 
         // .NET Framework
-        directory = new DirectoryInfo(@"C:\Windows\Microsoft.NET\Framework\");
         ext = new[] { ".log" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
-        directory = new DirectoryInfo(@"C:\Windows\Microsoft.NET\Framework64\");
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Windows\Microsoft.NET\Framework\");
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Windows\Microsoft.NET\Framework64\");
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
         // Errors
-        directory = new DirectoryInfo(@"C:\ProgramData\Microsoft\Windows\WER\ReportArchive\");
-        ext = new[] { ".wer" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(@"C:\ProgramData\Microsoft\Windows\WER\ReportArchive\");
+            ext = new[] { ".wer" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
         // System logs
-        DirectoryInfo[] directories =
-        {
-            new(@"C:\Windows\"),
-            new(@"C:\Windows\INF"),
-            new(@"C:\Windows\SoftwareDistribution\"),
-            new(@"C:\Windows\Microsoft Antimalware\Support\"),
-            new(@"C:\Windows\Panther\UnattendGC\"),
-            new(@"C:\Windows\Performance\WinSAT\")
-        };
+        DirectoryInfo[] directories;
         ext = new[] { ".log" };
-        files.AddRange(IScanner.GetFiles(directories, ext));
-        directories = new[]
+        try
         {
-            new DirectoryInfo(@"C:\Windows\debug\"),
-            new DirectoryInfo(@"C:\Windows\Logs\"),
-            new DirectoryInfo(@"C:\Windows\Panther\"),
-            new DirectoryInfo(@"C:\Windows\security\"),
-            new DirectoryInfo(@"C:\Windows\System32\")
-        };
-        files.AddRange(IScanner.GetFiles(directories, ext, true));
+            directories = new[]
+            {
+                new DirectoryInfo(@"C:\Windows\"),
+                new(@"C:\Windows\INF"),
+                new(@"C:\Windows\SoftwareDistribution\"),
+                new(@"C:\Windows\Microsoft Antimalware\Support\"),
+                new(@"C:\Windows\Panther\UnattendGC\"),
+                new(@"C:\Windows\Performance\WinSAT\")
+            };
+            files.AddRange(IScanner.GetFiles(directories, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
-        directory = new DirectoryInfo(@"C:\Windows\Logs\WindowsUpdate\");
-        ext = new[] { ".etl" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
-        directory = new DirectoryInfo(@"C:\Windows\SoftwareDistribution\DataStore\Logs");
-        ext = new[] { ".log", ".jrs", ".chk" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directories = new[]
+            {
+                new DirectoryInfo(@"C:\Windows\debug\"),
+                new(@"C:\Windows\Logs\"),
+                new(@"C:\Windows\Panther\"),
+                new(@"C:\Windows\security\"),
+                new(@"C:\Windows\System32\")
+            };
+            files.AddRange(IScanner.GetFiles(directories, ext, true));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Windows\Logs\WindowsUpdate\");
+            ext = new[] { ".etl" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Windows\SoftwareDistribution\DataStore\Logs");
+            ext = new[] { ".log", ".jrs", ".chk" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
         return files;
     }
 

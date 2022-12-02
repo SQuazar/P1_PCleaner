@@ -15,19 +15,41 @@ public class SystemTempFilesScanner : IScanner
         string[] ext;
 
         // Memory Dumps
-        directory = new DirectoryInfo(@"C:\Windows\");
-        ext = new[] { ".DMP" };
-        files.AddRange(IScanner.GetFiles(directory, ext, false));
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\CrashDumps");
-        ext = new[] { ".dmp" };
-        files.AddRange(IScanner.GetFiles(directory, ext, false));
-        directory = new DirectoryInfo(
-            $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Temp");
-        ext = new[] { "*" };
+        try
+        {
+            directory = new DirectoryInfo(@"C:\Windows\");
+            ext = new[] { ".DMP" };
+            files.AddRange(IScanner.GetFiles(directory, ext, false));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\CrashDumps");
+            ext = new[] { ".dmp" };
+            files.AddRange(IScanner.GetFiles(directory, ext, false));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+        
         // Temp files
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        try
+        {
+            directory = new DirectoryInfo(
+                $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Temp");
+            ext = new[] { "*" };
+            files.AddRange(IScanner.GetFiles(directory, ext));
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
 
         return files;
     }
