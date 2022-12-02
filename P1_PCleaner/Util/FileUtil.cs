@@ -7,6 +7,7 @@ public class FileUtil
 {
     public static long GetDirectorySize(DirectoryInfo dir)
     {
-        return dir.GetFiles().Sum(file => file.Length) + dir.GetDirectories().Sum(GetDirectorySize);
+        return dir.GetFiles().Sum(file => file.Length) + dir
+            .EnumerateDirectories("*", new EnumerationOptions { RecurseSubdirectories = true }).Sum(GetDirectorySize);
     }
 }
