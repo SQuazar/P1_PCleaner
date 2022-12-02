@@ -67,23 +67,32 @@ public class JunkFilesViewModel : ViewModelBase
         _navbar.CurrentViewModel = loadingModel;
         
         var selectedCategories = App.ScannedRepository.Categories().Where(pair => pair.Value.IsSelected)
-            .Select(pair => pair.Key);
+            .Select(pair => pair.Value);
         var selectedFiles = App.ScannedRepository.Categories().Values.Where(category => category.IsSelected)
-            .SelectMany(category => category.Files)
-            ;
+            .SelectMany(category => category.Files).ToArray();
         foreach (var selectedCategory in selectedCategories)
-            App.ScannedRepository.Categories().Remove(selectedCategory);
-        
+        {
+            selectedCategory.Files.Clear();
+            selectedCategory.IsSelected = false;
+        }
+
         var deletedCount = 0;
-        var fileInfs = selectedFiles as FileInf[] ?? selectedFiles.ToArray();
         _navbar.IsLocked = true;
         loadingModel.IsLoading = true;
-        foreach (var inf in fileInfs)
+        loadingModel.Text = "Поиск файлов...";
+        foreach (var inf in selectedFiles)
         {
             deletedCount++;
             loadingModel.Text = $"Удаление {inf.Name}";
-            loadingModel.Percent = (double)deletedCount / fileInfs.Length * 100;
-            File.Delete(inf.Path);
+            loadingModel.Percent = (double)deletedCount / selectedFiles.Length * 100;
+            try
+            {
+                File.Delete(inf.Path);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
             Thread.Sleep(1);
         }
 
