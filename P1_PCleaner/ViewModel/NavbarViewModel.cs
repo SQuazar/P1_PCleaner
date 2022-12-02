@@ -1,21 +1,33 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using P1_PCleaner.Command;
 using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
 
-public class NavbarViewModel : ObservableObject
+public class NavbarViewModel : ViewModelBase
 {
-    private ObservableObject? _currentViewModel;
+    private ViewModelBase _currentViewModel = new();
+    private bool _isLocked;
 
-    public ObservableObject? CurrentViewModel
+    public ViewModelBase CurrentViewModel
     {
         get => _currentViewModel;
         set
         {
             _currentViewModel = value;
             ViewModelChanged?.Invoke();
+        }
+    }
+
+    public bool IsLocked
+    {
+        get => _isLocked;
+        set
+        {
+            _isLocked = value;
+            OnPropertyChanged();
         }
     }
 
@@ -30,11 +42,18 @@ public class NavbarViewModel : ObservableObject
 
     public void ChangeViewModel(ViewType type)
     {
+        if (IsLocked) return;
+        if (App.ScannedRepository.Categories().Values.Sum(category => category.Files.Count) == 0)
+        {
+            CurrentViewModel = new ScanViewModel(this);
+            return;
+        }
+
         CurrentViewModel = type switch
         {
-            ViewType.Scanner => new ScanViewModel(),
+            ViewType.Scanner => new ScanViewModel(this),
             ViewType.RecycleBin => new RecycleBinViewModel(),
-            ViewType.JunkFiles => new JunkFilesViewModel(),
+            ViewType.JunkFiles => new JunkFilesViewModel(this),
             _ => new NotFoundViewModel()
         };
     }
