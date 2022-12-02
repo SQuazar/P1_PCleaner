@@ -6,7 +6,7 @@ using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
 
-public class BrowserCacheCategoryViewModel : ObservableObject
+public class BrowserCacheCategoryViewModel : ViewModelBase
 {
     public BrowserCacheCategoryViewModel(Category googleCategory, Category mozillaCategory, Category edgeCategory)
     {

@@ -6,7 +6,7 @@ using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
 
-public class DownloadsCategoryViewModel : ObservableObject
+public class DownloadsCategoryViewModel : ViewModelBase
 {
     public DownloadsCategoryViewModel(Category downloadsCategory)
     {

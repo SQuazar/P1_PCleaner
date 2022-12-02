@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace P1_PCleaner.Util;
 
-public class ObservableObject : INotifyPropertyChanged
+public class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 

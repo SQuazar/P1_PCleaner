@@ -2,15 +2,17 @@
 
 namespace P1_PCleaner.ViewModel;
 
-public class MainViewModel : ObservableObject
+public class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        NavbarViewModel.CurrentViewModel = new ScanViewModel();
+        
+        NavbarViewModel = new NavbarViewModel();
+        NavbarViewModel.CurrentViewModel = new ScanViewModel(NavbarViewModel);
         NavbarViewModel.ViewModelChanged += () => OnPropertyChanged(nameof(CurrentViewModel));
     }
 
-    public NavbarViewModel NavbarViewModel { get; } = new();
+    public NavbarViewModel NavbarViewModel { get; }
 
-    public ObservableObject? CurrentViewModel => NavbarViewModel.CurrentViewModel;
+    public ViewModelBase? CurrentViewModel => NavbarViewModel.CurrentViewModel;
 }

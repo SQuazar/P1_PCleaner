@@ -2,6 +2,6 @@
 
 namespace P1_PCleaner.ViewModel;
 
-public class NotFoundViewModel : ObservableObject
+public class NotFoundViewModel : ViewModelBase
 {
 }
