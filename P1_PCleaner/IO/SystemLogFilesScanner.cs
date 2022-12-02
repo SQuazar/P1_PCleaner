@@ -26,16 +26,33 @@ public class SystemLogFilesScanner : IScanner
         files.AddRange(IScanner.GetFiles(directory, ext));
 
         // System logs
-        directory = new DirectoryInfo(@"C:\Windows\");
+        DirectoryInfo[] directories =
+        {
+            new(@"C:\Windows\"),
+            new(@"C:\Windows\INF"),
+            new(@"C:\Windows\SoftwareDistribution\"),
+            new(@"C:\Windows\Microsoft Antimalware\Support\"),
+            new(@"C:\Windows\Panther\UnattendGC\"),
+            new(@"C:\Windows\Performance\WinSAT\")
+        };
         ext = new[] { ".log" };
-        files.AddRange(IScanner.GetFiles(directory, ext));
+        files.AddRange(IScanner.GetFiles(directories, ext));
+        directories = new[]
+        {
+            new DirectoryInfo(@"C:\Windows\debug\"),
+            new DirectoryInfo(@"C:\Windows\Logs\"),
+            new DirectoryInfo(@"C:\Windows\Panther\"),
+            new DirectoryInfo(@"C:\Windows\security\"),
+            new DirectoryInfo(@"C:\Windows\System32\")
+        };
+        files.AddRange(IScanner.GetFiles(directories, ext, true));
+
         directory = new DirectoryInfo(@"C:\Windows\Logs\WindowsUpdate\");
         ext = new[] { ".etl" };
         files.AddRange(IScanner.GetFiles(directory, ext));
         directory = new DirectoryInfo(@"C:\Windows\SoftwareDistribution\DataStore\Logs");
         ext = new[] { ".log", ".jrs", ".chk" };
         files.AddRange(IScanner.GetFiles(directory, ext));
-
         return files;
     }
 

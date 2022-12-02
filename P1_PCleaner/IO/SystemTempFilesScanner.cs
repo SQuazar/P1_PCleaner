@@ -15,7 +15,7 @@ public class SystemTempFilesScanner : IScanner
         string[] ext;
 
         // Memory Dumps
-        directory = new DirectoryInfo(@"C:\Windows");
+        directory = new DirectoryInfo(@"C:\Windows\");
         ext = new[] { ".DMP" };
         files.AddRange(IScanner.GetFiles(directory, ext, false));
         directory = new DirectoryInfo(

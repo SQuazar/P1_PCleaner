@@ -34,7 +34,7 @@ public class ScannedFilesRepository : IFilesRepository
         };
     }
 
-    public RecycleBin.Info? RecycleBinInfo { get; private set; }
+    public RecycleBin.Info? RecycleBinInfo { get; set; }
 
     public Dictionary<IFilesRepository.ScanCategory, Category> Categories()
     {
@@ -48,13 +48,19 @@ public class ScannedFilesRepository : IFilesRepository
         return cat;
     }
 
+    public event Action<IFilesRepository.ScanCategory>? CategoryStartLoading; 
+    public event Action<IFilesRepository.ScanCategory, Category>? CategoryLoaded;
+
     public void Load()
     {
         foreach (var scanner in Scanners)
         {
             if (!_categories.TryGetValue(scanner.GetScanCategory(), out var category))
                 continue;
-            category.Files.AddRange(scanner.Scan());
+            CategoryStartLoading?.Invoke(scanner.GetScanCategory());
+            var files = scanner.Scan();
+            category.Files.AddRange(files);
+            CategoryLoaded?.Invoke(scanner.GetScanCategory(), category);
         }
 
         RecycleBinInfo = RecycleBin.GetInfo();
@@ -62,7 +68,8 @@ public class ScannedFilesRepository : IFilesRepository
 
     public void Clear()
     {
-        _categories.Clear();
+        foreach (var key in _categories.Keys)
+            _categories[key] = new Category();
         RecycleBinInfo = null;
     }
 }
