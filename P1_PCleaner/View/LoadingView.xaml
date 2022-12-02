@@ -4,18 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="400" Background="Transparent"
+             d:DataContext="{d:DesignInstance viewModel:LoadingViewModel, IsDesignTimeCreatable=True}">
     <Border CornerRadius="10 0 10 0" Background="White">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!-- <Ellipse Width="100" Height="100" Stroke="Gray" StrokeDashArray="47 16" -->
-            <!--          StrokeThickness="5"> -->
-            <!-- </Ellipse> -->
-            <fa:ImageAwesome Icon="CircleOutlineNotch" Spin="True" Width="100" Height="100" />
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="100%"
-                       FontSize="24" />
-            <TextBlock Text="Your text here" FontSize="14" HorizontalAlignment="Center"
-                       Margin="0 150 0 0" />
+            <fa:ImageAwesome Icon="CircleOutlineNotch" Spin="True" Width="150" Height="150" />
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="24">
+                <Run Text="{Binding Percent, StringFormat=N1}"/>
+                <Run Text="%"/>
+            </TextBlock>
+            <TextBlock Text="{Binding Text}" FontSize="18" HorizontalAlignment="Center"
+                       Margin="0 200 0 0" />
         </Grid>
     </Border>
 </UserControl>

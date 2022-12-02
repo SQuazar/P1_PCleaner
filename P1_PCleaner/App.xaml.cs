@@ -9,11 +9,4 @@ namespace P1_PCleaner;
 public partial class App : Application
 {
     public static readonly ScannedFilesRepository ScannedRepository = new();
-
-    // Environment.ExpandEnvironmentVariables
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-        ScannedRepository.Load();
-    }
 }
