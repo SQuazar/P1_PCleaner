@@ -3,7 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="960" Background="Transparent">
-    <Border CornerRadius="10 0 10 0" Background="White" />
+             d:DesignHeight="600" d:DesignWidth="960" Background="Transparent"
+             d:DataContext="{d:DesignInstance viewModel:ScanViewModel, IsDesignTimeCreatable=True}">
+    <Border CornerRadius="10 0 10 0" Background="White">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"
+                        Visibility="{Binding IsLoaded, Converter={StaticResource InverseBooleanVisibilityConverter}}">
+                <TextBlock Text="Сканирование файлов системы" FontSize="24" />
+                <Button Margin="0 20 0 0"
+                        Content="Сканировать"
+                        Style="{StaticResource BtnBlue}"
+                        Command="{Binding StartScan}" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"
+                        Visibility="{Binding IsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Text="Сканирование файлов системы завершено" FontSize="24" />
+                <Button Margin="0 20 0 0"
+                        Content="Сканировать снова"
+                        Style="{StaticResource BtnWhite}"
+                        Command="{Binding StartScan}" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
