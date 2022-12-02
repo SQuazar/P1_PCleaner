@@ -154,8 +154,8 @@
                                     <TextBlock HorizontalAlignment="Right" FontSize="24" VerticalAlignment="Center"
                                                Margin="0 0 0 5">
                                         <ContentPresenter Content="{TemplateBinding Size}"
-                                                          ContentStringFormat="N1"/>
-                                        <ContentPresenter Content="{TemplateBinding SizeSuffix}"/>
+                                                          ContentStringFormat="N1" />
+                                        <ContentPresenter Content="{TemplateBinding SizeSuffix}" />
                                     </TextBlock>
                                     <CheckBox IsChecked="{TemplateBinding IsChecked}"
                                               FontSize="{TemplateBinding FontSize}"
@@ -164,15 +164,14 @@
                                               Command="{TemplateBinding Command}"
                                               CommandParameter="{TemplateBinding CommandParameter}"
                                               Padding="5 -4 0 0"
-                                              VerticalAlignment="Center">
-                                    </CheckBox>
+                                              VerticalAlignment="Center" />
                                 </Grid>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Size" Value="0">
-                                <Setter Property="Foreground" Value="Gray"/>
-                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Foreground" Value="Gray" />
+                                <Setter Property="IsEnabled" Value="False" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

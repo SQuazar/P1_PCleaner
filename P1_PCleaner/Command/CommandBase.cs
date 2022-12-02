@@ -9,7 +9,7 @@ public abstract class CommandBase : ICommand
     {
         return true;
     }
- 
+
     public abstract void Execute(object? parameter);
 
     public event EventHandler? CanExecuteChanged
@@ -17,6 +17,4 @@ public abstract class CommandBase : ICommand
         add => CommandManager.RequerySuggested += value;
         remove => CommandManager.RequerySuggested -= value;
     }
-    
-    
 }

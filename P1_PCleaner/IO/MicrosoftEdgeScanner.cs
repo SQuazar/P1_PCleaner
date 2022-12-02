@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Documents;
 using P1_PCleaner.Factory;
 using P1_PCleaner.Model;
 using P1_PCleaner.Repository;

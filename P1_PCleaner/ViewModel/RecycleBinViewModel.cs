@@ -5,8 +5,14 @@ namespace P1_PCleaner.ViewModel;
 
 public class RecycleBinViewModel : ObservableObject
 {
+    public RecycleBinViewModel()
+    {
+        var info = App.ScannedRepository.RecycleBinInfo ?? new RecycleBin.Info();
+        Info = info;
+    }
+
     public RecycleBin.Info Info { get; private set; }
-    
+
     public RelayCommand OpenRecycleBin => new(_ => RecycleBin.OpenRecycleBinFolder());
 
     public AsyncRelayCommand ClearRecycleBin => new(_ =>
@@ -16,10 +22,4 @@ public class RecycleBinViewModel : ObservableObject
         Info = info;
         OnPropertyChanged(nameof(Info));
     });
-
-    public RecycleBinViewModel()
-    {
-        var info = App.ScannedRepository.RecycleBinInfo ?? new RecycleBin.Info();
-        Info = info;
-    }
 }

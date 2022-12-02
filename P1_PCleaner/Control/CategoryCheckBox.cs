@@ -13,6 +13,12 @@ public class CategoryCheckBox : CheckBox
         typeof(string), typeof(CategoryCheckBox),
         new PropertyMetadata("B", OnSizeSuffixPropertyChanged));
 
+    static CategoryCheckBox()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(CategoryCheckBox),
+            new FrameworkPropertyMetadata(typeof(CategoryCheckBox)));
+    }
+
     public double Size
     {
         get => (double)GetValue(SizeProperty);
@@ -23,12 +29,6 @@ public class CategoryCheckBox : CheckBox
     {
         get => (string)GetValue(SizeSuffixProperty);
         set => SetValue(SizeSuffixProperty, value);
-    }
-
-    static CategoryCheckBox()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(CategoryCheckBox),
-            new FrameworkPropertyMetadata(typeof(CategoryCheckBox)));
     }
 
     private static void OnSizePropertyChanged(

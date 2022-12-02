@@ -15,20 +15,20 @@
                                   SizeSuffix="{Binding GoogleCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding GoogleCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding GoogleCategory}"/>
+                                  CommandParameter="{Binding GoogleCategory}" />
         <control:CategoryCheckBox Content="Mozilla Firefox" FontSize="16"
                                   Style="{StaticResource CategoryBox}"
                                   Size="{Binding MozillaCategory.SizeInfo.Size}"
                                   SizeSuffix="{Binding MozillaCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding MozillaCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding MozillaCategory}"/>
+                                  CommandParameter="{Binding MozillaCategory}" />
         <control:CategoryCheckBox Content="Microsoft Edge" FontSize="16"
                                   Style="{StaticResource CategoryBox}"
                                   Size="{Binding EdgeCategory.SizeInfo.Size}"
                                   SizeSuffix="{Binding EdgeCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding EdgeCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding EdgeCategory}"/>
+                                  CommandParameter="{Binding EdgeCategory}" />
     </StackPanel>
 </UserControl>

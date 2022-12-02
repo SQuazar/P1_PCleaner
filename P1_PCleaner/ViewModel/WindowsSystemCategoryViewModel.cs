@@ -8,9 +8,23 @@ namespace P1_PCleaner.ViewModel;
 
 public class WindowsSystemCategoryViewModel : ObservableObject
 {
-    private Category _logFilesCategory;
     private Category _cacheCategory;
+    private Category _logFilesCategory;
     private Category _tempFilesCategory;
+
+    public WindowsSystemCategoryViewModel(Category logFilesCategory, Category cacheCategory, Category tempFilesCategory)
+    {
+        _logFilesCategory = logFilesCategory;
+        _cacheCategory = cacheCategory;
+        _tempFilesCategory = tempFilesCategory;
+    }
+
+    public WindowsSystemCategoryViewModel()
+    {
+        _logFilesCategory = new Category();
+        _cacheCategory = new Category();
+        _tempFilesCategory = new Category();
+    }
 
     public Category LogFilesCategory
     {
@@ -47,19 +61,6 @@ public class WindowsSystemCategoryViewModel : ObservableObject
         category.IsSelected = !category.IsSelected;
         CategorySelected?.Invoke(category);
     });
-    
+
     public event Action<Category>? CategorySelected;
-
-    public WindowsSystemCategoryViewModel(Category logFilesCategory, Category cacheCategory, Category tempFilesCategory)
-    {
-        _logFilesCategory = logFilesCategory;
-        _cacheCategory = cacheCategory;
-        _tempFilesCategory = tempFilesCategory;
-    }
-
-    public WindowsSystemCategoryViewModel() {
-        _logFilesCategory = new Category();
-        _cacheCategory = new Category();
-        _tempFilesCategory = new Category();
-    }
 }

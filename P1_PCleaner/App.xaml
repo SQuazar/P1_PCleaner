@@ -34,7 +34,7 @@
                 <view:BrowserCacheCategoryView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:DownloadsCategoryViewModel}">
-                <view:DownloadsCategoryView/>
+                <view:DownloadsCategoryView />
             </DataTemplate>
             <Style TargetType="control:NavRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />
             <Style TargetType="control:CategoryRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />

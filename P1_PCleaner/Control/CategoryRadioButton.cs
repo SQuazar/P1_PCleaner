@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace P1_PCleaner.Control;
@@ -17,7 +13,13 @@ public class CategoryRadioButton : RadioButton
         nameof(CategoryIdentificator),
         typeof(string), typeof(CategoryRadioButton),
         new PropertyMetadata("B", OnCategoryIdentificatorPropertyChanged));
-    
+
+    static CategoryRadioButton()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(CategoryRadioButton), new
+            FrameworkPropertyMetadata(typeof(CategoryRadioButton)));
+    }
+
     public double CategorySize
     {
         get => (double)GetValue(CategorySizeProperty);
@@ -28,12 +30,6 @@ public class CategoryRadioButton : RadioButton
     {
         get => (string)GetValue(CategoryIdentificatorProperty);
         set => SetValue(CategoryIdentificatorProperty, value);
-    }
-
-    static CategoryRadioButton()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(CategoryRadioButton), new
-            FrameworkPropertyMetadata(typeof(CategoryRadioButton)));
     }
 
     private static void OnCategorySizePropertyChanged(

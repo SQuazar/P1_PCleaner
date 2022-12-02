@@ -19,14 +19,14 @@ public class NavbarViewModel : ObservableObject
         }
     }
 
-    public event Action? ViewModelChanged;
-
     public RelayCommand<string> OpenUrl => new(uri =>
     {
         Process.Start(new ProcessStartInfo(uri) { UseShellExecute = true });
     });
 
     public RelayCommand<ViewType> ChangeView => new(ChangeViewModel);
+
+    public event Action? ViewModelChanged;
 
     public void ChangeViewModel(ViewType type)
     {

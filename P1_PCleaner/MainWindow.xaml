@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="clr-namespace:P1_PCleaner.View"
         xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="960"
@@ -15,8 +14,9 @@
     <Border
         CornerRadius="7">
         <Grid>
-            <Border Loaded="FrameworkElement_OnLoaded" CornerRadius="7" BorderThickness="1" Background="{StaticResource NavColor}"
-                    Opacity="0.8"/>
+            <Border Loaded="FrameworkElement_OnLoaded" CornerRadius="7" BorderThickness="1"
+                    Background="{StaticResource NavColor}"
+                    Opacity="0.8" />
             <Grid ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -51,8 +51,7 @@
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Grid.Column="0" Content="{Binding NavbarViewModel}">
-                    </ContentControl>
+                    <ContentControl Grid.Column="0" Content="{Binding NavbarViewModel}" />
                     <Border Grid.Column="1" Background="Transparent" Margin="0 0 1 1"
                             BorderThickness="1 1 0 0" BorderBrush="#dfdfdf" CornerRadius="10 0 5 0">
                         <ContentControl Content="{Binding CurrentViewModel}" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using P1_PCleaner.Model;
 using P1_PCleaner.Repository;
 

@@ -38,7 +38,8 @@
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.RecycleBin}" />
             </StackPanel>
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 0 5 20" Orientation="Horizontal">
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 0 5 20"
+                        Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center">
                     <Hyperlink Foreground="Transparent"
                                Command="{Binding OpenUrl}"
@@ -50,21 +51,21 @@
                     <Hyperlink Foreground="Transparent"
                                Command="{Binding OpenUrl}"
                                CommandParameter="https://github.com/SQuazar">
-                        <fa:ImageAwesome Icon="Github" Width="35"/>
+                        <fa:ImageAwesome Icon="Github" Width="35" />
                     </Hyperlink>
                 </TextBlock>
                 <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
                     <Hyperlink Foreground="Transparent"
                                Command="{Binding OpenUrl}"
                                CommandParameter="https://t.me/squazar">
-                        <fa:ImageAwesome Icon="Telegram" Width="35" Foreground="#2b98ff"/>
+                        <fa:ImageAwesome Icon="Telegram" Width="35" Foreground="#2b98ff" />
                     </Hyperlink>
                 </TextBlock>
                 <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
                     <Hyperlink Foreground="Transparent"
                                Command="{Binding OpenUrl}"
                                CommandParameter="https://vityaschel.github.io/YouWantToBecomeAProgrammer/">
-                        <fa:ImageAwesome Icon="Code" Width="35"/>
+                        <fa:ImageAwesome Icon="Code" Width="35" />
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>

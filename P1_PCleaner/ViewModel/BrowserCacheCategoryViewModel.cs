@@ -8,15 +8,25 @@ namespace P1_PCleaner.ViewModel;
 
 public class BrowserCacheCategoryViewModel : ObservableObject
 {
-    private Category _googleCategory;
-    private Category _mozillaCategory;
-    private Category _edgeCategory;
+    public BrowserCacheCategoryViewModel(Category googleCategory, Category mozillaCategory, Category edgeCategory)
+    {
+        GoogleCategory = googleCategory;
+        MozillaCategory = mozillaCategory;
+        EdgeCategory = edgeCategory;
+    }
 
-    public Category GoogleCategory => _googleCategory;
+    public BrowserCacheCategoryViewModel()
+    {
+        GoogleCategory = new Category();
+        MozillaCategory = new Category();
+        EdgeCategory = new Category();
+    }
 
-    public Category MozillaCategory => _mozillaCategory;
+    public Category GoogleCategory { get; }
 
-    public Category EdgeCategory => _edgeCategory;
+    public Category MozillaCategory { get; }
+
+    public Category EdgeCategory { get; }
 
     public ICommand SelectCategory => new RelayCommand<Category>(category =>
     {
@@ -25,18 +35,4 @@ public class BrowserCacheCategoryViewModel : ObservableObject
     });
 
     public event Action<Category>? CategorySelected;
-
-    public BrowserCacheCategoryViewModel(Category googleCategory, Category mozillaCategory, Category edgeCategory)
-    {
-        _googleCategory = googleCategory;
-        _mozillaCategory = mozillaCategory;
-        _edgeCategory = edgeCategory;
-    }
-
-    public BrowserCacheCategoryViewModel()
-    {
-        _googleCategory = new Category();
-        _mozillaCategory = new Category();
-        _edgeCategory = new Category();
-    }
 }

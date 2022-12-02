@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:P1_PCleaner.View"
              xmlns:control="clr-namespace:P1_PCleaner.Control"
              xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
@@ -16,20 +15,20 @@
                                   SizeSuffix="{Binding LogFilesCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding LogFilesCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding LogFilesCategory}"/>
+                                  CommandParameter="{Binding LogFilesCategory}" />
         <control:CategoryCheckBox Content="Кэш Системы" FontSize="16"
                                   Style="{StaticResource CategoryBox}"
                                   Size="{Binding CacheCategory.SizeInfo.Size}"
                                   SizeSuffix="{Binding CacheCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding CacheCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding CacheCategory}"/>
+                                  CommandParameter="{Binding CacheCategory}" />
         <control:CategoryCheckBox Content="Временные Файлы" FontSize="16"
                                   Style="{StaticResource CategoryBox}"
                                   Size="{Binding TempFilesCategory.SizeInfo.Size}"
                                   SizeSuffix="{Binding TempFilesCategory.SizeInfo.SizeSuffix}"
                                   IsChecked="{Binding TempFilesCategory.IsSelected}"
                                   Command="{Binding SelectCategory}"
-                                  CommandParameter="{Binding TempFilesCategory}"/>
+                                  CommandParameter="{Binding TempFilesCategory}" />
     </StackPanel>
 </UserControl>

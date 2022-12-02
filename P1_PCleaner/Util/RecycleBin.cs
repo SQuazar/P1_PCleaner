@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using P1_PCleaner.Factory;
@@ -7,35 +8,11 @@ namespace P1_PCleaner.Util;
 
 public static class RecycleBin
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    // ReSharper disable once InconsistentNaming
-    private struct SHQUERYRBINFO
-    {
-        public int cbSize;
-        public long i64Size;
-        public long i64NumItems;
-    }
-
-    private enum RecycleFlags : uint
-    {
-        SherBNoConfirmation = 0x00000001,
-        SherBNoProgressUi = 0x00000002,
-        SherBNoSound = 0x00000004
-    }
-
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     private static extern uint SHQueryRecycleBin(string pszRootPath, ref SHQUERYRBINFO pShQueryRbInfo);
 
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     private static extern uint SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, RecycleFlags flags);
-
-
-    public class Info
-    {
-        public double Size { get; init; }
-        public string SizeSuffix { get; set; } = "B";
-        public long FileCount { get; init; }
-    }
 
     public static Info GetInfo()
     {
@@ -66,6 +43,30 @@ public static class RecycleBin
 
     public static void OpenRecycleBinFolder()
     {
-        System.Diagnostics.Process.Start("explorer.exe", "shell:RecycleBinFolder");
+        Process.Start("explorer.exe", "shell:RecycleBinFolder");
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    // ReSharper disable once InconsistentNaming
+    private struct SHQUERYRBINFO
+    {
+        public int cbSize;
+        public readonly long i64Size;
+        public readonly long i64NumItems;
+    }
+
+    private enum RecycleFlags : uint
+    {
+        SherBNoConfirmation = 0x00000001,
+        SherBNoProgressUi = 0x00000002,
+        SherBNoSound = 0x00000004
+    }
+
+
+    public class Info
+    {
+        public double Size { get; init; }
+        public string SizeSuffix { get; set; } = "B";
+        public long FileCount { get; init; }
     }
 }

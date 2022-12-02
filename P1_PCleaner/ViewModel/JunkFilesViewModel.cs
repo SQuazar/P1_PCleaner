@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Windows.Input;
 using P1_PCleaner.Command;
 using P1_PCleaner.Factory;
 using P1_PCleaner.Model;
@@ -12,11 +10,35 @@ namespace P1_PCleaner.ViewModel;
 
 public class JunkFilesViewModel : ObservableObject
 {
-    private ObservableObject? _currentJunkCategory;
-
-    private readonly WindowsSystemCategoryViewModel _windowsCategoryViewModel;
     private readonly BrowserCacheCategoryViewModel _browserCacheCategoryViewModel;
     private readonly DownloadsCategoryViewModel _downloadsCategoryViewModel;
+
+    private readonly WindowsSystemCategoryViewModel _windowsCategoryViewModel;
+    private ObservableObject? _currentJunkCategory;
+
+    public JunkFilesViewModel()
+    {
+        _windowsCategoryViewModel = new WindowsSystemCategoryViewModel(
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemLogFiles),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemCache),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.TempFiles));
+        _windowsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+
+        _browserCacheCategoryViewModel = new BrowserCacheCategoryViewModel(
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.GoogleChrome),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MozillaFirefox),
+            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MicrosoftEdge)
+        );
+        _browserCacheCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+
+        _downloadsCategoryViewModel =
+            new DownloadsCategoryViewModel(App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads));
+        _downloadsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
+
+        CurrentJunkCategory = _windowsCategoryViewModel;
+
+        ChangeJunkCategory = new RelayCommand<JunkCategory>(ChangeCategory);
+    }
 
     public SizeInfo WindowsSystemSize => new FileSizeFactory().CreateInfo
     (
@@ -30,7 +52,8 @@ public class JunkFilesViewModel : ObservableObject
         App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MozillaFirefox).SizeInfo +
         App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MicrosoftEdge).SizeInfo;
 
-    public SizeInfo DownloadsSize => App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads).SizeInfo;
+    public SizeInfo DownloadsSize =>
+        App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads).SizeInfo;
 
     public SizeInfo SelectedSize
     {
@@ -58,30 +81,6 @@ public class JunkFilesViewModel : ObservableObject
     }
 
     public RelayCommand<JunkCategory> ChangeJunkCategory { get; }
-
-    public JunkFilesViewModel()
-    {
-        _windowsCategoryViewModel = new WindowsSystemCategoryViewModel(
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemLogFiles),
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.SystemCache),
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.TempFiles));
-        _windowsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
-        
-        _browserCacheCategoryViewModel = new BrowserCacheCategoryViewModel(
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.GoogleChrome),
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MozillaFirefox),
-            App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.MicrosoftEdge)
-        );
-        _browserCacheCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
-
-        _downloadsCategoryViewModel =
-            new DownloadsCategoryViewModel(App.ScannedRepository.GetCategory(IFilesRepository.ScanCategory.Downloads));
-        _downloadsCategoryViewModel.CategorySelected += _ => OnPropertyChanged(nameof(SelectedSize));
-
-        CurrentJunkCategory = _windowsCategoryViewModel;
-        
-        ChangeJunkCategory = new RelayCommand<JunkCategory>(ChangeCategory);
-    }
 
     private void ChangeCategory(JunkCategory category)
     {

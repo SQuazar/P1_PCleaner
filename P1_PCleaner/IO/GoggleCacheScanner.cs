@@ -13,7 +13,7 @@ public class GoggleCacheScanner : IScanner
         var files = new List<FileInf>();
         DirectoryInfo directory;
         string[] ext;
-        
+
         // Google Cache Storage
         directory = new DirectoryInfo(
             $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\AppData\Local\Google\Chrome\User Data\Default\Service Worker\CacheStorage");

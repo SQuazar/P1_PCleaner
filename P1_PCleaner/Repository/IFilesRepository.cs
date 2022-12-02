@@ -5,11 +5,6 @@ namespace P1_PCleaner.Repository;
 
 public interface IFilesRepository
 {
-    Dictionary<ScanCategory, Category> Categories();
-    Category GetCategory(ScanCategory category);
-    void Load();
-    void Clear();
-
     public enum ScanCategory
     {
         SystemLogFiles,
@@ -20,4 +15,9 @@ public interface IFilesRepository
         MicrosoftEdge,
         Downloads
     }
+
+    Dictionary<ScanCategory, Category> Categories();
+    Category GetCategory(ScanCategory category);
+    void Load();
+    void Clear();
 }

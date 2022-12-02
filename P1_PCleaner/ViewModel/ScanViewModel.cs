@@ -4,5 +4,4 @@ namespace P1_PCleaner.ViewModel;
 
 public class ScanViewModel : ObservableObject
 {
-    
 }

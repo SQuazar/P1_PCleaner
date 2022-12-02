@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using P1_PCleaner.Factory;
 using P1_PCleaner.IO;
 using P1_PCleaner.Model;
 using P1_PCleaner.Util;
@@ -9,8 +8,17 @@ namespace P1_PCleaner.Repository;
 
 public class ScannedFilesRepository : IFilesRepository
 {
+    private static readonly IScanner[] Scanners =
+    {
+        new SystemLogFilesScanner(),
+        new SystemCacheFilesScanner(),
+        new SystemTempFilesScanner(),
+        new GoggleCacheScanner(),
+        new MicrosoftEdgeScanner(),
+        new DownloadsScanner()
+    };
+
     private readonly Dictionary<IFilesRepository.ScanCategory, Category> _categories;
-    public RecycleBin.Info? RecycleBinInfo { get; private set; } 
 
     public ScannedFilesRepository()
     {
@@ -26,6 +34,8 @@ public class ScannedFilesRepository : IFilesRepository
         };
     }
 
+    public RecycleBin.Info? RecycleBinInfo { get; private set; }
+
     public Dictionary<IFilesRepository.ScanCategory, Category> Categories()
     {
         return _categories;
@@ -38,16 +48,6 @@ public class ScannedFilesRepository : IFilesRepository
         return cat;
     }
 
-    private static readonly IScanner[] Scanners =
-    {
-        new SystemLogFilesScanner(),
-        new SystemCacheFilesScanner(),
-        new SystemTempFilesScanner(),
-        new GoggleCacheScanner(),
-        new MicrosoftEdgeScanner(),
-        new DownloadsScanner()
-    };
-
     public void Load()
     {
         foreach (var scanner in Scanners)
@@ -58,7 +58,6 @@ public class ScannedFilesRepository : IFilesRepository
         }
 
         RecycleBinInfo = RecycleBin.GetInfo();
-
     }
 
     public void Clear()

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using FontAwesome.WPF;
-using static System.Windows.TextAlignment;
 
 namespace P1_PCleaner.Control;
 
@@ -17,16 +16,16 @@ public class NavRadioButton : RadioButton
         new PropertyMetadata(FontAwesomeIcon.None,
             OnIconPropertyChanged));
 
-    public FontAwesomeIcon Icon
-    {
-        get => (FontAwesomeIcon)GetValue(IconProperty);
-        set => SetValue(ContentProperty, value);
-    }
-
     static NavRadioButton()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(NavRadioButton), new
             FrameworkPropertyMetadata(typeof(NavRadioButton)));
+    }
+
+    public FontAwesomeIcon Icon
+    {
+        get => (FontAwesomeIcon)GetValue(IconProperty);
+        set => SetValue(ContentProperty, value);
     }
 
     private static void OnIconPropertyChanged(
