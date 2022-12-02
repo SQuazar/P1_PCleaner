@@ -5,8 +5,9 @@ namespace P1_PCleaner.Repository;
 
 public interface IFilesRepository
 {
-    Dictionary<ScanCategory, IEnumerable<FileInf>> Files();
-    IEnumerable<FileInf> Files(ScanCategory category);
+    Dictionary<ScanCategory, Category> Categories();
+    Category GetCategory(ScanCategory category);
+    void Load();
     void Clear();
 
     public enum ScanCategory
@@ -17,8 +18,6 @@ public interface IFilesRepository
         GoogleChrome,
         MozillaFirefox,
         MicrosoftEdge,
-        MicrosoftEdgeLegacy,
-        MicrosoftEthernetExplorer,
         Downloads
     }
 }
