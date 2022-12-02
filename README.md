@@ -1,4 +1,4 @@
 # P1_PCleaner
 # Минимальные требования
-* .NET 6.0
+* [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet?cid=getdotnetcore)
 * Компьютер, а не калькулятор
