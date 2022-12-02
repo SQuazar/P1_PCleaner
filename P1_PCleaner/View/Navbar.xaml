@@ -15,24 +15,28 @@
                 <TextBlock Text="Управление" Margin="10 10 0 0" FontSize="22" FontWeight="Bold" />
                 <control:NavRadioButton Content="Сканирование"
                                         IsChecked="True"
+                                        IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
                                         Icon="Home"
                                         Style="{StaticResource NavIconButton}"
                                         Margin="0 8 0 0"
                                         Command="{Binding ChangeView}"
-                                        CommandParameter="{x:Static viewModel:ViewType.Scanner}" />
+                                        CommandParameter="{x:Static viewModel:ViewType.Scanner}"/>
                 <control:NavRadioButton Content="Мусор"
+                                        IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
                                         Style="{StaticResource NavIconButton}"
                                         Icon="TrashOutline"
                                         Margin="0 8 0 0"
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.JunkFiles}" />
                 <control:NavRadioButton Content="Дубликаты файлов"
+                                        IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
                                         Style="{StaticResource NavIconButton}"
                                         Icon="FileTextOutline"
                                         Margin="0 8 0 0"
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.Undefined}" />
                 <control:NavRadioButton Content="Корзина"
+                                        IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
                                         Style="{StaticResource NavIconButton}"
                                         Margin="0 8 0 0" Icon="TrashOutline"
                                         Command="{Binding ChangeView}"
