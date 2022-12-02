@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using P1_PCleaner.Command;
+﻿using P1_PCleaner.Command;
 using P1_PCleaner.Util;
 
 namespace P1_PCleaner.ViewModel;
@@ -8,7 +6,7 @@ namespace P1_PCleaner.ViewModel;
 public class RecycleBinViewModel : ObservableObject
 {
     public RecycleBin.Info Info { get; private set; }
-
+    
     public RelayCommand OpenRecycleBin => new(_ => RecycleBin.OpenRecycleBinFolder());
 
     public AsyncRelayCommand ClearRecycleBin => new(_ =>
@@ -21,7 +19,7 @@ public class RecycleBinViewModel : ObservableObject
 
     public RecycleBinViewModel()
     {
-        var info = RecycleBin.GetInfo();
+        var info = App.ScannedRepository.RecycleBinInfo ?? new RecycleBin.Info();
         Info = info;
     }
 }
