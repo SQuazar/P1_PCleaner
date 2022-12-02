@@ -4,6 +4,7 @@
              xmlns:view="clr-namespace:P1_PCleaner.View"
              xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              xmlns:control="clr-namespace:P1_PCleaner.Control"
+             xmlns:converter="clr-namespace:P1_PCleaner.Converter"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -36,9 +37,15 @@
             <DataTemplate DataType="{x:Type viewModel:DownloadsCategoryViewModel}">
                 <view:DownloadsCategoryView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:LoadingViewModel}">
+                <view:LoadingView />
+            </DataTemplate>
             <Style TargetType="control:NavRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />
             <Style TargetType="control:CategoryRadioButton" BasedOn="{StaticResource {x:Type RadioButton}}" />
             <Style TargetType="control:CategoryCheckBox" BasedOn="{StaticResource {x:Type CheckBox}}" />
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converter:InverseBooleanVisibilityConverter x:Key="InverseBooleanVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
