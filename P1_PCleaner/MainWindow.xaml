@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="960"
+        Title="PCleaner" Height="600" Width="960"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
