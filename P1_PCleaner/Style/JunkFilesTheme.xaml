@@ -141,30 +141,34 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="CategoryBox" TargetType="control:CategoryCheckBox"
-           BasedOn="{StaticResource {x:Type CheckBox}}">
+           BasedOn="{StaticResource {x:Type ToggleButton}}">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="control:CategoryCheckBox">
-                        <Border BorderThickness="0 0 0 1" BorderBrush="#E3E9F0"
-                                Padding="8 8 8 4">
-                            <Grid VerticalAlignment="Center">
-                                <CheckBox IsChecked="{TemplateBinding IsChecked}"
-                                  FontSize="{TemplateBinding FontSize}"
-                                  Content="{TemplateBinding Content}"
-                                      Foreground="{TemplateBinding Foreground}"
-                                    
-                                  Padding="5 -4 0 0"
-                                  VerticalAlignment="Center">
-                                </CheckBox>
-                                <TextBlock HorizontalAlignment="Right" FontSize="24" VerticalAlignment="Center"
-                                       Margin="0 0 0 5">
-                                <ContentPresenter Content="{TemplateBinding Size}"
-                                                  ContentStringFormat="N1"/>
-                                <ContentPresenter Content="{TemplateBinding SizeSuffix}"/>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
+                        <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                            <Border BorderThickness="0 0 0 1" BorderBrush="#E3E9F0"
+                                    Padding="8 8 8 4">
+                                <Grid VerticalAlignment="Center">
+                                    <TextBlock HorizontalAlignment="Right" FontSize="24" VerticalAlignment="Center"
+                                               Margin="0 0 0 5">
+                                        <ContentPresenter Content="{TemplateBinding Size}"
+                                                          ContentStringFormat="N1"/>
+                                        <ContentPresenter Content="{TemplateBinding SizeSuffix}"/>
+                                    </TextBlock>
+                                    <CheckBox IsChecked="{TemplateBinding IsChecked}"
+                                              FontSize="{TemplateBinding FontSize}"
+                                              Content="{TemplateBinding Content}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Command="{TemplateBinding Command}"
+                                              CommandParameter="{TemplateBinding CommandParameter}"
+                                              Padding="5 -4 0 0"
+                                              VerticalAlignment="Center">
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Size" Value="0">
                                 <Setter Property="Foreground" Value="Gray"/>
@@ -174,7 +178,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="Blue"/>
         </Style.Setters>
     </Style>
 </ResourceDictionary>
