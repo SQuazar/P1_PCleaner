@@ -55,8 +55,10 @@
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Margin="0 0 20 0">
-                        <Button Content="Очистить" Style="{StaticResource BtnBlue}" Margin="0 0 20 0" />
-                        <Button Content="Сканировать" Style="{StaticResource BtnWhite}" />
+                        <Button Content="Очистить" Style="{StaticResource BtnBlue}" Margin="0 0 20 0"
+                                Command="{Binding ClearSelectedFiles}"/>
+                        <Button Content="Сканировать" Style="{StaticResource BtnWhite}"
+                                Command="{Binding Scan}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
