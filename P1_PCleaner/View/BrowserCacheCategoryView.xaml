@@ -4,18 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:control="clr-namespace:P1_PCleaner.Control"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="460" d:DesignWidth="540">
+             d:DesignHeight="460" d:DesignWidth="540"
+             d:DataContext="{d:DesignInstance viewModel:BrowserCacheCategoryViewModel, IsDesignTimeCreatable=True}">
     <StackPanel Orientation="Vertical" Background="White">
         <control:CategoryCheckBox Content="Google Chrome" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding GoogleCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding GoogleCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding GoogleCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding GoogleCategory}"/>
         <control:CategoryCheckBox Content="Mozilla Firefox" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding MozillaCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding MozillaCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding MozillaCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding MozillaCategory}"/>
         <control:CategoryCheckBox Content="Microsoft Edge" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
-        <control:CategoryCheckBox Content="Microsoft Edge (Legacy)" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
-        <control:CategoryCheckBox Content="Microsoft Ethernet Explorer" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding EdgeCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding EdgeCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding EdgeCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding EdgeCategory}"/>
     </StackPanel>
 </UserControl>

@@ -5,14 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:P1_PCleaner.View"
              xmlns:control="clr-namespace:P1_PCleaner.Control"
+             xmlns:viewModel="clr-namespace:P1_PCleaner.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="460" d:DesignWidth="540">
+             d:DesignHeight="460" d:DesignWidth="540"
+             d:DataContext="{d:DesignInstance viewModel:WindowsSystemCategoryViewModel, IsDesignTimeCreatable=True}">
     <StackPanel Orientation="Vertical" Background="White">
         <control:CategoryCheckBox Content="Системные Лог Файлы" FontSize="16"
-                                  Style="{StaticResource CategoryBox}"/>
-        <control:CategoryCheckBox Content="Кэш Системы" FontSize="16" Size="500"
-                                  Style="{StaticResource CategoryBox}"/>
-        <control:CategoryCheckBox Content="Временные Файлы" FontSize="16" Size="2.3" SizeSuffix="GB"
-                                  Style="{StaticResource CategoryBox}"/>
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding LogFilesCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding LogFilesCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding LogFilesCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding LogFilesCategory}"/>
+        <control:CategoryCheckBox Content="Кэш Системы" FontSize="16"
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding CacheCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding CacheCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding CacheCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding CacheCategory}"/>
+        <control:CategoryCheckBox Content="Временные Файлы" FontSize="16"
+                                  Style="{StaticResource CategoryBox}"
+                                  Size="{Binding TempFilesCategory.SizeInfo.Size}"
+                                  SizeSuffix="{Binding TempFilesCategory.SizeInfo.SizeSuffix}"
+                                  IsChecked="{Binding TempFilesCategory.IsSelected}"
+                                  Command="{Binding SelectCategory}"
+                                  CommandParameter="{Binding TempFilesCategory}"/>
     </StackPanel>
 </UserControl>
