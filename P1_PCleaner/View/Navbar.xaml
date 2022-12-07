@@ -28,13 +28,13 @@
                                         Margin="0 8 0 0"
                                         Command="{Binding ChangeView}"
                                         CommandParameter="{x:Static viewModel:ViewType.JunkFiles}" />
-                <control:NavRadioButton Content="Дубликаты файлов"
-                                        IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
-                                        Style="{StaticResource NavIconButton}"
-                                        Icon="FileTextOutline"
-                                        Margin="0 8 0 0"
-                                        Command="{Binding ChangeView}"
-                                        CommandParameter="{x:Static viewModel:ViewType.Undefined}" />
+                <!-- <control:NavRadioButton Content="Дубликаты файлов" -->
+                <!--                         IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}" -->
+                <!--                         Style="{StaticResource NavIconButton}" -->
+                <!--                         Icon="FileTextOutline" -->
+                <!--                         Margin="0 8 0 0" -->
+                <!--                         Command="{Binding ChangeView}" -->
+                <!--                         CommandParameter="{x:Static viewModel:ViewType.Undefined}" /> -->
                 <control:NavRadioButton Content="Корзина"
                                         IsEnabled="{Binding IsLocked, Converter={StaticResource InverseBooleanVisibilityConverter}}"
                                         Style="{StaticResource NavIconButton}"
