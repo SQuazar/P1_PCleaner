@@ -67,7 +67,6 @@
                 </TextBlock>
                 <TextBlock VerticalAlignment="Center" Margin="10 0 0 0">
                     <Hyperlink Foreground="Transparent"
-                               Command="{Binding OpenUrl}"
                                CommandParameter="https://vityaschel.github.io/YouWantToBecomeAProgrammer/">
                         <fa:ImageAwesome Icon="Code" Width="35" />
                     </Hyperlink>
