@@ -1,5 +1,5 @@
 # P1_PCleaner
-[Download Installer](https://github.com/SQuazar/P1_PCleaner/releases/download/1.0.0/PCleaner_installer.zip)
+[Download Installer](https://github.com/SQuazar/P1_PCleaner/releases/download/1.0.0/)
 # Минимальные требования
 * [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet?cid=getdotnetcore)
 * Компьютер, а не калькулятор
